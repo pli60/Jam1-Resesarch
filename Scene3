@@ -1,0 +1,49 @@
+LIST banditstate = Undefeated, Defeated
+
+=== Scene_3 ===
+{Scene_2: As you are heading back from the dungeon | As you are heading towards the dungeon}, a group of bandits come out of nowhere from the bushes and block your way. They are poorly equipped, some with no armor, some with no weapon.
+
+{
+- Bandit >= Known:
+    You knew about the bandits, and you have already prepared yourself for the battle.
+- else:
+    You did not know about the bandits and haven’t equipped yourself for the fight.
+}
+“Hey kid, give me everything you got and I’ll allow you to leave without losing a limb.”
+    * “Okay okay, I’ll give you what you wanted. Calm down.” You decide to settle things the easy way and hand over your weapon and armor to the bandits.
+        -> Surrender
+    *“No bloody way. If you want these, you’ll have to come and take them. Say less.” You get ready for a battle.
+        -> Fight
+
+===Surrender===
+The bandits took everything you have and run away. Unlucky.
+~Equipment = Unarmed
+~Completion +=1
+-> MainLoop
+
+===Fight===
+{
+- Bandit == Known && Equipment != Unarmed:
+    You defeat the bandits with the superior armor and weapon as well as the preparation you have.
+    ~ banditstate = Defeated
+- Equipment == Iron: 
+    Even though you were unaware of the bandits, you easily defeat them with the superior armor and weapon you have.
+    ~ banditstate = Defeated
+- else: 
+    Your courage is applaudable, however it is not a good idea to fight a group of bandits without any preparation. You are quickly overwhelmed because you are outnumbered. The bandits plunder every valuable item you have and leave you badly wounded
+    {
+    - ProtagonistState == Unharmed:
+        ~ ProtagonistState = Wounded
+    - ProtagonistState == Wounded:
+        ~ ProtagonistState = NearDeath
+    }
+    ~Equipment = Unarmed
+}
+
+{
+- banditstate == Defeated:
+    Today is your lucky day, you faced bandits but left without losing anything.
+- else: What a terrible day it has been. Robbed and wounded.
+}
+~Completion +=1
+-> MainLoop

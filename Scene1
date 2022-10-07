@@ -1,0 +1,15 @@
+=== Scene_1 ===
+It’s time to purchase some new equipment for the dungeon exploration. You arrive at the town, Nagskur, a medium sized town which is famous for its blacksmiths and close distance with the dungeon.
+You head towards the blacksmith. "Welcome young adventurer, what do you need?" says the blacksmith. "This is my first time entering the dungeon, maybe I should start with some basic equipment." {Scene_2: "The dungeon was not as easy as I thought it would be. I’m going to need better armor and weapon."} {Scene_3:"The bandits were a pain to deal with, I definitely need better equipment."}
+
+    * I'll have the stone lance and the leather armor set.
+        ~ Equipment = Stone
+    * {Scene_2 or Scene_3} “May I have that iron lance and the iron armor set?”
+        ~ Equipment = Iron
+
+
+- “Sure, here’s your weapon and armor.” The blacksmith hands over your equipment. 
+    
+    
+~Completion +=1
+-> MainLoop

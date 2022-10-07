@@ -1,0 +1,16 @@
+=== Scene_4 ===
+
+You arrive at the town, Notick, a small sized town which is famous for its close distance with the dungeon and affordable living district. Although the town is not big, it feels welcoming and the people here are friendly and talkative.
+	“How’s it going young man, is it your first time here? Let me show you around.” a middle aged woman with exaggerated muscles suddenly appears in front of you with a big smile. 
+	
+* “Thank you for the offer, but I’ll look around myself.”
+    “That's a shame. Hope you enjoy your stay.”
+* "Sure, it's my first time here and I wanna know things around here."
+    The woman then shows you around the town. “Before you go, just a heads up. There have been groups of bandits around the dungeon." {Scene_3: "I've actually already encountered them, but thank you for the advice."} The woman disappears as quickly as she appeared.
+        ~ Bandit = Known
+	
+- You arrive at the lodge you rented and rested for the night.
+
+
+~Completion +=1
+-> MainLoop

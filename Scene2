@@ -1,0 +1,41 @@
+=== Scene_2 ===
+
+You arrive at the dungeon. The dungeon is actually a deep cave that leads to many possible different paths.
+    -> Encounter
+	
+=Encounter
+~temp monster = "{~goat|lion|python|tiger|bull|tortoise|donkey|monkey|seagull|elephant}"
+~temp monster2 = "{~goat|lion|python|tiger|bull|tortoise|donkey|monkey|seagull|elephant}"
+
+On your way down to one of the paths you chose, you encounter a {monster} with a {monster2}’s head. 
+
+    +(Escape) {Escape<3} [Escape.]
+        You decide to run away from the monstrosity.
+        -> Encounter
+	* Fight
+	    {Escape != 0:There is nowhere to run.} 
+	    You decide to fight the monstrosity even though your instinct tells you not to. You prepare yourself and charge towards the creature.
+
+{
+- Equipment == Iron:
+    You came to the battle well equipped with the best armor and weapon there is. The creature’s attack barely damages you and your thrusts greatly injure the creature. You slay the monster and call it a day.
+- Equipment == Stone:
+    The creature is tougher than you thought and your lance is barely piercing through its skin. Your leather armor is also not holding strong against its attacks. At the end, you kill the monster but also leave yourself wounded.
+    {
+    - ProtagonistState <= Unharmed:
+        ~ ProtagonistState = Wounded
+    - ProtagonistState <= Wounded:
+        ~ ProtagonistState = NearDeath
+    }
+- else:
+    You did not come prepared for this fight. You are not well enough equipped. {ProtagonistState == Wounded: and your previous wounds make everything worse.} Without a doubt you lose the battle, the creature strikes at you and leaves you badly wounded.
+    {
+    - ProtagonistState <= Unharmed:
+        ~ ProtagonistState = Wounded
+    - ProtagonistState <= Wounded:
+        ~ ProtagonistState = NearDeath
+    }
+}
+
+~Completion +=1
+-> MainLoop
